@@ -34,23 +34,30 @@ public class Main {
         ts.begin();
 
         try {
-            Member findMember = entityManager.find(Member.class, 1L);
-            System.out.println("id = " + findMember.getId());
-            System.out.println("name = " + findMember.getName());
+//            Member findMember = entityManager.find(Member.class, 1L);
+//            System.out.println("id = " + findMember.getId());
+//            System.out.println("name = " + findMember.getName());
+//
+//            //삭제
+//            //entityManager.remove(findMember);
+//
+//            // 저장하지 않아도 저장
+//            findMember.setName("jpa");
+//
+//            // jpql
+//            // DB가 아닌 객체에 대한 쿼리
+//            List<Member> result = entityManager.createQuery("select m from Member as m", Member.class)
+//                    .setFirstResult(1)
+//                    .setMaxResults(10)      // 범위 조정 가능
+//                    .getResultList();
 
-            //삭제
-            //entityManager.remove(findMember);
-
-            // 저장하지 않아도 저장
-            findMember.setName("jpa");
-
-            // jpql
-            // DB가 아닌 객체에 대한 쿼리
-            List<Member> result = entityManager.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(10)      // 범위 조정 가능
-                    .getResultList();
-
+            //// 영속성 컨텍스트
+            // 비영속
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("HELLOJPA");
+            //영속 상태
+            entityManager.persist(member);
 
             ts.commit();
         } catch (Exception e) {

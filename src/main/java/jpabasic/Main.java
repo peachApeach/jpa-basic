@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jpabasic.domain.Member;
+import jpabasic.domain.Order;
+import jpabasic.domain.OrderItem;
 
 import java.util.List;
 
@@ -18,11 +20,12 @@ public class Main {
         ts.begin();
 
         try {
-            // 생성
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("hello");
-            entityManager.persist(member);
+            Order order = new Order();
+            entityManager.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+            entityManager.persist(orderItem);
 
             ts.commit();
         } catch (Exception e) {
